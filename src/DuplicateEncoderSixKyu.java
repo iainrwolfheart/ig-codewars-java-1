@@ -19,29 +19,30 @@ public class DuplicateEncoderSixKyu {
         char foundChar;
         int i;
 
-        for (char ch = 'a'; ch <= 'z'; ch++) {
+//        populate HashMap w/ASCII chars (though not all, so some test may fail)
+        for (char ch = 32 ; ch <= 126; ch++) {
             charMap.put(ch, 0);
         }
 
+//        iterate through input String and increment instances of a-z in HashMap
         for (i = 0; i < word.length(); i++) {
-            if (word.toLowerCase().charAt(i) >= 'a' && word.toLowerCase().charAt(i) <= 'z') {
-              foundChar = word.toLowerCase().charAt(i);
-              Integer temp = charMap.get(foundChar);
-              charMap.put(foundChar, temp.intValue()+1);
-          }
+            if (word.toLowerCase().charAt(i) >= 32 && word.toLowerCase().charAt(i) <= 126) {
+                foundChar = word.toLowerCase().charAt(i);
+                Integer temp = charMap.get(foundChar);
+                charMap.put(foundChar, temp.intValue()+1);
+            }
         }
 
+//        iterate through input String (again) and replace letters w/relevant character
         for (i = 0; i < word.length(); i++) {
             foundChar = word.toLowerCase().charAt(i);
-            switch(charMap.get(foundChar)) {
-                case 1 :
-                    result += "(";
-                    break;
-                case 2 :
-                    result += ")";
-                    break;
-                default :
-                    break;
+
+            if (charMap.get(foundChar) == 1) {
+                result += "(";
+            } else if (charMap.get(foundChar) > 1) {
+                result += ")";
+            } else {
+                result += foundChar;
             }
         }
 
