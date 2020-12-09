@@ -19,21 +19,21 @@ public class DuplicateEncoderSixKyu {
         char foundChar;
         int i;
 
-//        populate HashMap w/ASCII chars (though not all, so some test may fail)
-        for (char ch = 32 ; ch <= 126; ch++) {
+//        populate HashMap w/ASCII printable chars 'space' -> '~' only (so some tests could fail, but didn't!)
+        for (char ch = 32; ch <= 126; ch++) {
             charMap.put(ch, 0);
         }
 
-//        iterate through input String and increment instances of a-z in HashMap
+//        iterate through input String and increment found instances of printable chars in HashMap
         for (i = 0; i < word.length(); i++) {
             if (word.toLowerCase().charAt(i) >= 32 && word.toLowerCase().charAt(i) <= 126) {
                 foundChar = word.toLowerCase().charAt(i);
-                Integer temp = charMap.get(foundChar);
+                Integer temp = charMap.get(foundChar); // Bcz thanks, immutability
                 charMap.put(foundChar, temp.intValue()+1);
-            }
+            } else continue;
         }
 
-//        iterate through input String (again) and replace letters w/relevant character
+//        iterate through input String (again...) and replace letters w/relevant character in output
         for (i = 0; i < word.length(); i++) {
             foundChar = word.toLowerCase().charAt(i);
 
@@ -42,7 +42,7 @@ public class DuplicateEncoderSixKyu {
             } else if (charMap.get(foundChar) > 1) {
                 result += ")";
             } else {
-                result += foundChar;
+                result += foundChar; // Not really needed but resilient, I guess!
             }
         }
 
