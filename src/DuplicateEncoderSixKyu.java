@@ -5,10 +5,10 @@ public class DuplicateEncoderSixKyu {
     public static void main(String[] args) {
 
         System.out.println("Expected: \")()())()(()()(\"\n" +
-                        "Actual: \"" + encode("Prespecialized") + "\"");
+                        "Actual: \"" + encodeBetter("Prespecialized") + "\"");
 
         System.out.println("Expected: \"))))())))\"\n" +
-                "Actual: \"" + DuplicateEncoderSixKyu.encode("   ()(   ") + "\"");
+                "Actual: \"" + DuplicateEncoderSixKyu.encodeBetter("   ()(   ") + "\"");
 
     }
 
@@ -48,4 +48,16 @@ public class DuplicateEncoderSixKyu {
 
         return result;
     }
+
+    static String encodeBetter(String word) {
+        word = word.toLowerCase();
+        String result = "";
+
+        for (int i = 0; i < word.length(); i++) {
+            result += word.lastIndexOf(word.charAt(i)) == word.indexOf(word.charAt(i)) ? "(" : ")";
+        }
+        return result;
+    }
 }
+
+
