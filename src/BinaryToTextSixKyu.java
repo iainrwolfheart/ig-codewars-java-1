@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 public class BinaryToTextSixKyu {
 
@@ -9,14 +9,11 @@ public class BinaryToTextSixKyu {
 
     public static String binaryToText(String binary) {
 
-        ArrayList<String> binaryList = new ArrayList<>();
+        StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < binary.length() - 1; i += 8) {
-            binaryList.add(binary.substring(i, Math.min(binary.length(), i + 8)));
+            output.append((char) Integer.parseInt(binary.substring(i, Math.min(binary.length(), i + 8)), 2));
         }
-
-        StringBuilder output = new StringBuilder();
-        binaryList.stream().forEach(ele -> output.append((char) Integer.parseInt(ele, 2)));
 
         return output.toString();
     }
